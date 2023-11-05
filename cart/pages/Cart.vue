@@ -1,5 +1,5 @@
 <template>
-  <div class="py-6" v-if="userStore.login">
+  <div class="py-6" v-if="authStore.isLogin">
     <v-row>
       <v-col md="8">
         <v-card class="py-5 px-4" style="max-height: 500px;overflow-y: auto">
@@ -84,7 +84,7 @@
       </v-col>
     </v-row>
   </div>
-  <div class="py-6" v-if="!userStore.login">
+  <div class="py-6" v-if="!authStore.isLogin">
     <v-row>
       <v-col md="8">
         <v-card class="py-5 px-4" style="max-height: 500px;overflow-y: auto">
@@ -97,7 +97,9 @@
 </template>
 
 <script setup>
-import {useCartStore,useUserStore} from "~/stores/index.js";
+import {useCartStore} from "~/stores/index.js";
+import {useAuthStore} from "~/stores/auth.store.js";
+
 const cartStore = useCartStore()
-const userStore = useUserStore()
+const authStore = useAuthStore()
 </script>

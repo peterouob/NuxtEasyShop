@@ -72,7 +72,7 @@ export const useCartStore = defineStore('cart',{
         }
     }
 })
-export const useUserStore = defineStore('user',{
+export const useUserTestStore = defineStore('user',{
     states:({
         login:false,
     }),
