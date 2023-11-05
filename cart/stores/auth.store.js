@@ -22,8 +22,24 @@ export const useAuthStore = defineStore('auth',{
           this.isLogin = true
           console.log(this.isLogin)
           // router.push({path:this.returnUrl || "/"})
-          // window.location = "/"
+          window.location = "/"
       },
+        async register(firstname,lastname,phone,email,username,password){
+            const {data} = await axios.post(`${baseURL}/register`, {
+                firstname:firstname,
+                lastname:lastname,
+                phone:phone,
+                email:email,
+                username:username,
+                password:password,
+            })
+            // this.user = user
+            localStorage.setItem('user',JSON.stringify(data))
+            this.isLogin = true
+            console.log(this.isLogin)
+            // router.push({path:this.returnUrl || "/"})
+            window.location = "/"
+        },
         logout(){
             this.user = null
             localStorage.removeItem('user')

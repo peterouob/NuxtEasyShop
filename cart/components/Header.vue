@@ -40,6 +40,7 @@
                   >
                     <v-text-field
                         label="Legal first name*"
+                        v-model="user.firstname"
                         required
                     ></v-text-field>
                   </v-col>
@@ -50,6 +51,7 @@
                   >
                     <v-text-field
                         label="Legal last name*"
+                        v-model="user.lastname"
                         hint="example of persistent helper text"
                         persistent-hint
                         required
@@ -57,33 +59,34 @@
                   </v-col>
                   <v-col cols="12">
                     <v-text-field
+                        label="Phone*"
+                        v-model="user.phone"
+                        required
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
                         label="Email*"
+                        v-model="user.email"
                         required
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12">
                     <v-text-field
                         label="username*"
+                        v-model="user.username"
                         required
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12">
                     <v-text-field
                         label="Password*"
+                        v-model="user.password"
                         type="password"
                         required
                     ></v-text-field>
                   </v-col>
-                  <v-col
-                      cols="12"
-                      sm="6"
-                  >
-                    <v-select
-                        :items="['0-17', '18-29', '30-54', '54+']"
-                        label="Age*"
-                        required
-                    ></v-select>
-                  </v-col>
+
                 </v-row>
               </v-container>
               <v-btn
@@ -106,7 +109,7 @@
               <v-btn
                   color="blue-darken-1"
                   variant="text"
-                  @click="dialog = false"
+                  @click="register"
               >
                 Register
               </v-btn>
@@ -165,11 +168,6 @@
                 >
                   Close
                 </v-btn>
-                <!--                <v-btn-->
-                <!--                    color="blue-darken-1"-->
-                <!--                    variant="text"-->
-                <!--                    @click="dialogLogin = false;userStore.loginUser()"-->
-                <!--                >-->
                 <v-btn
                     color="blue-darken-1"
                     variant="text"
@@ -202,6 +200,10 @@ const userStore = useUserTestStore()
 const authStore = useAuthStore()
 
 let user = reactive({
+  firstname:"",
+  lastname:"",
+  phone:"",
+  email:"",
   username:"",
   password:""
 })
@@ -213,6 +215,12 @@ function login(){
   authStore.login(user.username,user.password)
       .catch(error=>console.log(error))
 }
+function register(){
+  authStore.register(user.firstname,user.lastname,user.phone,user.email,user.username,user.password)
+      .catch(error=>console.log(error))
+
+}
+
 </script>
 
 <style lang="scss" scoped>
